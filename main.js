@@ -6,9 +6,25 @@
 const FORM_ENDPOINT = 'https://formspree.io/f/FORM_ID_TODO';
 
 // ============================================================
+// COMPONENT LOADER
+// Fetches HTML partials from /components/ and injects them
+// in DOM order, then boots all interactive behaviour.
+// ============================================================
+async function loadComponents() {
+  const slots = Array.from(document.querySelectorAll('[data-component]'));
+  const htmls = await Promise.all(
+    slots.map((el) => fetch(`components/${el.dataset.component}.html`).then((r) => r.text()))
+  );
+  slots.forEach((el, i) => {
+    el.insertAdjacentHTML('afterend', htmls[i]);
+    el.remove();
+  });
+}
+
+// ============================================================
 // NAV: scrolled border + mobile disclosure
 // ============================================================
-(function initNav() {
+function initNav() {
   const header = document.querySelector('.site-header');
   const toggle = document.querySelector('.nav-toggle');
   const links = document.getElementById('nav-links');
@@ -43,12 +59,12 @@ const FORM_ENDPOINT = 'https://formspree.io/f/FORM_ID_TODO';
       toggle.setAttribute('aria-expanded', 'false');
     });
   });
-})();
+}
 
 // ============================================================
 // SCROLL ANIMATIONS: fade-up via IntersectionObserver
 // ============================================================
-(function initAnimations() {
+function initAnimations() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   const observer = new IntersectionObserver(
@@ -64,12 +80,12 @@ const FORM_ENDPOINT = 'https://formspree.io/f/FORM_ID_TODO';
   );
 
   document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
-})();
+}
 
 // ============================================================
 // FORM: validation, honeypot, submission
 // ============================================================
-(function initForm() {
+function initForm() {
   const form = document.getElementById('waitlist-form');
   if (!form) return;
 
@@ -207,4 +223,13 @@ const FORM_ENDPOINT = 'https://formspree.io/f/FORM_ID_TODO';
       setSubmitting(false);
     }
   });
-})();
+}
+
+// ============================================================
+// BOOT
+// ============================================================
+loadComponents().then(() => {
+  initNav();
+  initAnimations();
+  initForm();
+});
