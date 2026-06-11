@@ -61,7 +61,7 @@ export default function Nav() {
             <li key={l.href}>
               <a
                 href={l.href}
-                className="text-sm text-body hover:text-heading transition-colors duration-150"
+                className="text-base text-body hover:text-heading transition-colors duration-150"
               >
                 {l.label}
               </a>
