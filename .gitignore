@@ -74,9 +74,9 @@ web_modules/
 .cache
 .parcel-cache
 
-# Next.js build output
-.next
-out
+# Next.js
+.next/
+out/
 
 # Nuxt.js build / generate output
 .nuxt
@@ -141,3 +141,9 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Project-specific
+screenshots/
+.DS_Store
+docs/
+assets/
