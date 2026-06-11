@@ -24,7 +24,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          PAGES_BASE_PATH: /laxora-website
+          NEXT_PUBLIC_BASE_PATH: /laxora-website
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3

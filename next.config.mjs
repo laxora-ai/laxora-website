@@ -2,8 +2,11 @@
 const nextConfig = {
   output: 'export',
   trailingSlash: true,
-  images: { unoptimized: true },
-  basePath: process.env.PAGES_BASE_PATH || '',
+  images: {
+    loader: 'custom',
+    loaderFile: './src/lib/imageLoader.ts',
+  },
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
 }
 
 export default nextConfig
