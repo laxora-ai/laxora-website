@@ -2,91 +2,105 @@
 
 Marketing site for [laxora.ai](https://laxora.ai) — an AI front desk platform for dental and physician offices.
 
-Static HTML + CSS + vanilla JS. No build step. Deploys from the repo root via GitHub Pages.
+Built with Next.js 14 App Router + Tailwind CSS v3. Statically exported and deployed to GitHub Pages via GitHub Actions.
 
-## Local preview
+## Local development
 
 ```bash
-python3 -m http.server 8000
-# Open http://localhost:8000
+npm install
+npm run dev
+# Open http://localhost:3000
+```
+
+## Build
+
+```bash
+npm run build   # outputs to out/
+npm run typecheck
 ```
 
 ## File map
 
 ```
 /
-├── index.html                  single page, all content
-├── styles.css                  design tokens, layout, components
-├── main.js                     nav behavior, scroll animations, form POST
-├── assets/
-│   ├── favicon.svg             "L" lettermark (SVG, teal on white)
-│   ├── apple-touch-icon.png    180×180 home screen icon
-│   ├── og-image.png            1200×630 Open Graph / Twitter card image
-│   └── team/
-│       ├── akash.jpg           swap with real photo (see below)
-│       └── pratik.jpg          swap with real photo
-├── scripts/
-│   └── generate-assets.py     regenerates placeholder images (requires Pillow)
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx          Geist font, metadata/SEO, globals
+│   │   ├── page.tsx            assembles all sections
+│   │   └── globals.css         Tailwind directives, base styles
+│   └── components/
+│       ├── Nav.tsx             sticky nav, mobile menu
+│       ├── Hero.tsx            headline, CTAs, booking mock UI
+│       ├── WhatWeDo.tsx        3-card feature grid
+│       ├── HowItWorks.tsx      3-step layout
+│       ├── WhoWeServe.tsx      2-card practice grid
+│       ├── Team.tsx            founder cards with photos
+│       ├── WaitlistForm.tsx    form with validation and Formspree POST
+│       ├── Footer.tsx          logo, copyright, nav links
+│       └── FadeUp.tsx          Framer Motion scroll animation wrapper
+├── public/
+│   ├── favicon.svg
+│   └── assets/
+│       ├── apple-touch-icon.png
+│       ├── og-image.png
+│       └── team/
+│           ├── akash.jpg
+│           └── pratik.jpg
+├── _legacy/                    old static HTML site (safe to delete)
+├── .github/workflows/
+│   └── deploy.yml              builds and deploys to gh-pages on push to main
+├── next.config.mjs
+├── tailwind.config.ts          design tokens (colors, font, radii, animations)
 ├── CNAME                       laxora.ai
-└── .nojekyll                   disables Jekyll on GitHub Pages
+└── .nojekyll
 ```
 
 ## Swapping team photos
 
-Replace `assets/team/akash.jpg` and `assets/team/pratik.jpg` with real photos.
+Replace `public/assets/team/akash.jpg` and `public/assets/team/pratik.jpg` with real photos.
 
-Requirements: **square crop, minimum 800×800 px, JPEG**. The page renders them at 80×80 CSS px but higher resolution looks sharp on retina displays.
+Requirements: **square crop, minimum 800×800 px, JPEG**.
 
-## Changing the form endpoint
+## Configuring the waitlist form
 
-Open `main.js` and update the constant at the top:
+Open `src/components/WaitlistForm.tsx` and replace the placeholder at the top:
 
-```js
-const FORM_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+```ts
+const FORM_ENDPOINT = 'https://formspree.io/f/FORM_ID_TODO'
 ```
 
-**Option A — Formspree (free, ~5 minutes):**
+**Formspree (free, ~5 minutes):**
 1. Go to [formspree.io](https://formspree.io), sign in, create a new form.
-2. Copy the form ID (looks like `xpwzqkrv`).
-3. Replace `FORM_ID_TODO` in the constant above.
+2. Copy the form ID (e.g. `xpwzqkrv`).
+3. Replace `FORM_ID_TODO` with it.
 
-**Option B — API Gateway (Pratik's backend):**
-Replace the entire URL string with the endpoint URL once it is available.
-
-Until the endpoint is configured, the form shows a success state but submissions are not captured. A `[Laxora] FORM_ENDPOINT is not configured` warning appears in the browser console.
-
-## Filling in TODO comments
-
-Search `index.html` for `<!-- TODO:` to find content still needing attention:
-
-| Comment | What to add |
-|---------|-------------|
-| `<!-- TODO: Akash bio -->` | One-line bio for Akash |
-| `<!-- TODO: Pratik -->` | Last name, role, bio, LinkedIn URL |
-| `<!-- TODO: Pratik role -->` | Role line (e.g., "Co-founder, Infrastructure") |
-| `<!-- TODO: confirm mailbox exists -->` | Verify hello@laxora.ai is live before launch |
-
-## Editing copy
-
-All page text is in `index.html`. Search for the heading of the section you want to edit.
+Until configured, the form shows a success state but submissions are not captured. A warning appears in the browser console.
 
 ## Deploying
 
-**One-time GitHub Pages setup (Pratik):**
+**Push to `main` = live.** GitHub Actions runs `npm run build` and deploys `out/` to the `gh-pages` branch automatically.
 
-1. Repo Settings → Pages → Deploy from a branch → `main`, `/ (root)`
-2. Custom domain: `laxora.ai`, then enforce HTTPS once the cert issues (usually a few minutes)
-3. Route 53 — A records on the apex:
+### One-time GitHub Pages setup
+
+1. After the first push to `main`, go to **Settings → Pages → Source** → `gh-pages` branch, `/ (root)`
+2. Custom domain: add `laxora.ai` once DNS is configured (see below)
+
+### Custom domain (laxora.ai) — DNS setup
+
+Once you have access to the DNS provider (Route 53 or similar):
+
+1. Add A records on the apex domain pointing to GitHub Pages:
    ```
    185.199.108.153
    185.199.109.153
    185.199.110.153
    185.199.111.153
    ```
-4. Route 53 — AAAA records: see [GitHub Pages IP addresses](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-an-apex-domain) for the IPv6 addresses
-5. Route 53 — CNAME record: `www` → `laxora-ai.github.io`
-6. Decide whether the apex (`laxora.ai`) or `www` is canonical and set up a redirect for the other
+2. Add a CNAME record: `www` → `laxora-ai.github.io`
+3. In `public/CNAME`, confirm the file contains `laxora.ai`
+4. In `.github/workflows/deploy.yml`, add `cname: laxora.ai` back to the deploy step and remove the `NEXT_PUBLIC_BASE_PATH` env var from the build step
+5. In GitHub Settings → Pages → Custom domain, enter `laxora.ai` and enforce HTTPS
 
-After that: **merge to `main` = live**. No build or deploy step needed.
+After DNS propagates, the site will be live at `https://laxora.ai`.
 
-> **Note:** A privacy policy is needed before pushing the waitlist hard. The form collects name, office name, office type, and work email.
+> **Note:** A privacy policy is needed before pushing the waitlist publicly. The form collects name, office name, office type, and work email.
