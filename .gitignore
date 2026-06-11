@@ -145,3 +145,5 @@ vite.config.ts.timestamp-*
 # Project-specific
 screenshots/
 .DS_Store
+docs/
+assets/
