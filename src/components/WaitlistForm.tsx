@@ -262,7 +262,7 @@ export default function WaitlistForm() {
                 <circle cx="24" cy="24" r="22" stroke="#0F766E" strokeWidth="2" />
                 <path d="M14 24l7 7 13-14" stroke="#0F766E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              <h3 className="text-xl font-bold text-heading mb-2">You&apos;re on the list.</h3>
+              <h2 className="text-xl font-bold text-heading mb-2">You&apos;re on the list.</h2>
               <p className="text-body">We&apos;ll reach out as onboarding opens.</p>
             </div>
           )}
