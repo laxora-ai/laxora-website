@@ -142,7 +142,7 @@ maxWidth: {
 | Card grids | `<FadeUp delay={i * 0.08}>` | 80ms stagger per card |
 | Nav scroll border | CSS transition in Nav.tsx | `border-bottom` transitions in 150ms on scroll > 8px |
 | Button hover | Tailwind `transition-colors duration-150` | bg/border transitions |
-| Booking mock pulse | CSS keyframe `ring-pulse` in globals.css | single 1.2s ring animation, fires once on load via `animation-fill-mode: both` |
+| Booking mock pulse | CSS keyframe `ring-pulse` in globals.css | applied to the Laxora confirmation bubble div; single 1.2s ring, 0.4s delay, `animation-fill-mode: both`, fires once on page load |
 | Form focus | Tailwind `transition-shadow duration-150` | border color + box-shadow on focus |
 | prefers-reduced-motion | `useReducedMotion()` in FadeUp | children render immediately, no motion |
 
@@ -226,16 +226,6 @@ maxWidth: {
 ## 7. Technical config
 
 ### next.config.ts
-```ts
-const nextConfig = {
-  output: 'trailingSlash' as never,  // use trailingSlash: true
-  trailingSlash: true,
-  images: { unoptimized: true },
-}
-// output: 'export'
-```
-
-Correct version:
 ```ts
 import type { NextConfig } from 'next'
 const nextConfig: NextConfig = {
