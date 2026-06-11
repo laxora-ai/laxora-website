@@ -45,7 +45,7 @@ export default function Team() {
                   alt={`${member.name}, ${member.role}`}
                   width={96}
                   height={96}
-                  className="rounded-full object-cover shrink-0"
+                  className="w-24 h-24 rounded-full object-cover shrink-0"
                 />
                 <div className="min-w-0">
                   <h3 className="text-base font-semibold text-heading">{member.name}</h3>
