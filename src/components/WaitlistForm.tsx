@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react'
 
-const FORM_ENDPOINT = 'https://formspree.io/f/FORM_ID_TODO'
+const FORM_ENDPOINT = 'https://formspree.io/f/xnjkvpky'
 
 type Fields = {
   full_name: string
