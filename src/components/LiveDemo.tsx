@@ -3,10 +3,10 @@
 import { useState } from 'react'
 
 const replies: Record<string, string> = {
-  'Do you take Delta Dental?': "Yes! We're in-network with Delta Dental PPO. Would you like to book a cleaning or check your benefits first?",
-  'I need to reschedule my appointment': 'Of course. I have openings this Thursday at 10 AM or Friday at 2 PM. Which works better for you?',
-  'What are your office hours?': "We're open Monday–Friday, 8 AM to 5 PM. I can also help you book outside those hours — want to set something up?",
-  'Can I book a new patient visit?': 'Welcome! I can get you booked. First visit typically takes about 60 minutes. Do you prefer mornings or afternoons?',
+  'Do you accept my insurance?': "We work with most major plans. If you let me know your insurance provider, I can confirm your coverage and get you booked right away.",
+  'I need to reschedule my appointment': "No problem at all — life happens. I have a few openings this week. Do mornings or afternoons work better for you?",
+  'What are your hours?': "We're here Monday through Friday, 8 AM to 5 PM. That said, you can reach me any time — I'll make sure nothing slips through.",
+  'Can I be seen this week?': "Let's make that happen. I have openings as early as tomorrow. Do you have a preferred time, or should I find the first available slot?",
 }
 
 export default function LiveDemo() {
