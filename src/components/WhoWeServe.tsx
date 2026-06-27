@@ -41,12 +41,12 @@ export default function WhoWeServe() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {CARDS.map((card, i) => (
             <FadeUp key={card.title} delay={i * 0.08}>
-              <div className="bg-white rounded-card border border-border p-8 h-full">
+              <div className="bg-white rounded-[20px] border border-border border-l-4 border-l-accent p-8 h-full transition hover:-translate-y-1 hover:shadow-md">
                 <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center text-accent mb-4">
                   {card.icon}
                 </div>
                 <h3 className="text-lg font-semibold text-heading mb-3">{card.title}</h3>
-                <p className="text-body leading-relaxed">{card.description}</p>
+                <p className="text-body leading-relaxed">{card.description}</p><p className="mt-5 text-xs font-semibold uppercase tracking-widest text-accent">Recall · Hygiene · New Patient Intake</p><p className="mt-5 text-xs font-semibold uppercase tracking-widest text-accent">Scheduling · Refills · Referrals</p>
               </div>
             </FadeUp>
           ))}
