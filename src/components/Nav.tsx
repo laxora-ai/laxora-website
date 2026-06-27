@@ -6,7 +6,7 @@ const NAV_LINKS = [
   { href: '#what-we-do', label: 'What we do' },
   { href: '#how-it-works', label: 'How it works' },
   { href: '#who-we-serve', label: 'Who we serve' },
-  { href: '#team', label: 'Team' },
+  { href: '#security', label: 'Security' },
 ]
 
 export default function Nav() {
@@ -14,7 +14,7 @@ export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
+    const onScroll = () => setScrolled(window.scrollY > 80)
     window.addEventListener('scroll', onScroll, { passive: true })
     onScroll()
     return () => window.removeEventListener('scroll', onScroll)
@@ -31,8 +31,8 @@ export default function Nav() {
   return (
     <header
       role="banner"
-      className={`sticky top-0 z-50 bg-white transition-colors duration-150 ${
-        scrolled ? 'border-b border-border' : ''
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
+        scrolled ? 'bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)]' : 'bg-white/70 backdrop-blur'
       }`}
     >
       <nav

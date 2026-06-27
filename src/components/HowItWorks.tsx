@@ -5,18 +5,18 @@ const STEPS = [
   {
     number: '1',
     title: 'Connect',
-    description: 'Laxora plugs into your scheduling system and phone lines.',
+    description: 'Laxora plugs into your existing scheduling system and phone lines. No ripping out your current stack.',
   },
   {
     number: '2',
     title: 'Automate',
-    description: 'It starts answering, booking, and following up under rules you set.',
+    description: 'Laxora starts answering, booking, and following up under rules you configure. You stay in control.',
   },
   {
     number: '3',
     title: 'Focus',
     description:
-      'Your front desk handles the exceptions and the human moments. Laxora handles the routine.',
+      'Your front desk handles the exceptions and human moments. Laxora handles the repetitive 80%.',
   },
 ]
 
@@ -38,9 +38,9 @@ export default function HowItWorks() {
             <Fragment key={step.title}>
               <FadeUp
                 delay={i * 0.08}
-                className="flex flex-row md:flex-col items-start gap-5 pb-10 md:pb-0"
+                className="group flex flex-row md:flex-col items-start gap-5 pb-10 md:pb-0"
               >
-                <div className="w-10 h-10 rounded-full border-2 border-accent text-accent font-bold text-sm flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-full border-2 border-accent text-accent font-bold text-sm flex items-center justify-center shrink-0 transition duration-150 group-hover:bg-accent group-hover:text-white">
                   {step.number}
                 </div>
                 <div className="md:mt-5">
@@ -59,7 +59,7 @@ export default function HowItWorks() {
               )}
             </Fragment>
           ))}
-        </div>
+        </div><div className="mt-10 inline-flex rounded-xl border border-border bg-bg-alt px-4 py-3 text-sm text-body">📅 Most practices are live within 24 hours.</div>
       </div>
     </section>
   )

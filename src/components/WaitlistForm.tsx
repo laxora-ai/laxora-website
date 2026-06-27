@@ -126,11 +126,12 @@ export default function WaitlistForm() {
           {!success ? (
             <>
               <div className="mb-8 text-center">
+                <span className="text-xs font-semibold uppercase tracking-widest text-accent">Get early access</span>
                 <h2 id="waitlist-heading" className="text-3xl font-bold text-heading tracking-tight">
                   Get early access.
                 </h2>
                 <p className="text-body mt-3">
-                  Tell us about your practice and we will reach out as onboarding opens.
+                  Tell us about your practice and we'll reach out as onboarding opens.
                 </p>
               </div>
 
@@ -246,12 +247,12 @@ export default function WaitlistForm() {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="h-11 px-6 rounded-btn bg-accent hover:bg-accent-hover disabled:opacity-60 text-white font-medium transition-colors duration-150"
+                    className="h-11 w-full sm:w-auto px-6 rounded-btn bg-accent hover:bg-accent-hover disabled:opacity-60 text-white font-medium transition-colors duration-150"
                   >
                     {submitting ? 'Sending…' : 'Request early access'}
                   </button>
                   <p className="text-xs text-muted">
-                    Built with patient privacy and data security as first principles.
+                    🔒 Built with patient privacy and data security as first principles.
                   </p>
                 </div>
               </form>
@@ -262,8 +263,8 @@ export default function WaitlistForm() {
                 <circle cx="24" cy="24" r="22" stroke="#0F766E" strokeWidth="2" />
                 <path d="M14 24l7 7 13-14" stroke="#0F766E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              <h2 className="text-xl font-bold text-heading mb-2">You&apos;re on the list.</h2>
-              <p className="text-body">We&apos;ll reach out as onboarding opens.</p>
+              <h2 className="text-xl font-bold text-heading mb-2">✅ You&apos;re on the list!</h2>
+              <p className="text-body">We&apos;ll reach out as onboarding opens for your practice type.</p>
             </div>
           )}
 
